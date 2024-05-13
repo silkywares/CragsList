@@ -11,7 +11,7 @@ public class Crag
 
     public Crag(string url)
     {
-        Console.Write("\nConstructing crag: ");
+        Console.Write("\nConstructing... ");
         
         Url = url;
         Name = CragParse.findName(url);

@@ -16,3 +16,4 @@ C:\Code\HelloWorld\bin\Debug\net6.0\HtmlAgilityPack.dll
 C:\Code\HelloWorld\obj\Debug\net6.0\hw.csproj.AssemblyReference.cache
 C:\Code\HelloWorld\obj\Debug\net6.0\hw.csproj.Up2Date
 C:\Code\HelloWorld\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Code\HelloWorld\obj\Debug\net6.0\hw.sourcelink.json

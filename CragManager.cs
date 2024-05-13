@@ -5,18 +5,17 @@ using System.IO;
 using System.Linq;
 
 class CragManager{
-    public List<Crag> crags;
     string filePath = "C:\\Code\\HelloWorld\\crags.json";
+    public List<Crag> crags;
     public CragManager()
     {
         crags = new List<Crag>();
+        crags = LoadFromJson();
     }
-
+    
     public void SaveToJson()
     {
-        Console.WriteLine("Saving crag to JSON.\n");
-        string filePath = "C:\\Code\\HelloWorld\\crags.json";
-
+        Console.WriteLine("Saving crag to JSON.");
         // Serialize the crags list to JSON
         string json = JsonConvert.SerializeObject(crags, Formatting.Indented);
 
@@ -56,8 +55,6 @@ class CragManager{
 
     public void RemoveCrag(int cragIndex)
     {
-        string filePath = "C:\\Code\\HelloWorld\\crags.json";
-
         // Load data from JSON file
         List<Crag> cragsList = JsonConvert.DeserializeObject<List<Crag>>(File.ReadAllText(filePath));
 
@@ -83,10 +80,8 @@ class CragManager{
         }
     }
 
-    
-
     public void ListCrags(){
-        Console.WriteLine("\nListing crags saved:");
+        Console.WriteLine("\nListing crags saved: # "+crags.Count);
             for (int i = 0; i < crags.Count; i++)
             {
                 Console.WriteLine("Crag " + crags[i].Index + ": " + crags[i].Name);
