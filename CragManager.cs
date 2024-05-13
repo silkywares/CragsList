@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+
 
 class CragManager{
     string filePath = "C:\\Code\\HelloWorld\\crags.json";
@@ -81,7 +81,7 @@ class CragManager{
     }
 
     public void ListCrags(){
-        Console.WriteLine("\nListing crags saved: # "+crags.Count);
+        Console.WriteLine("\n\nListing crags saved: # " + crags.Count);
             for (int i = 0; i < crags.Count; i++)
             {
                 Console.WriteLine("Crag " + crags[i].Index + ": " + crags[i].Name);

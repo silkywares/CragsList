@@ -18,11 +18,10 @@ class WeatherCall{
 
     public static string wcall(string latlon){
         using(HttpClient client = new HttpClient()){
-            Console.WriteLine("Reaching out to OpenWeather!");
+            Console.WriteLine("Reaching out to OpenWeather!\n");
             
             string apiUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latlon+ "&exclude=hourly,minutely,daily,alerts&appid=45e62891196b886baf19eb0f2efde345";
             HttpResponseMessage response = client.GetAsync(apiUrl).GetAwaiter().GetResult();
-
 
             if(response.IsSuccessStatusCode){
                 return response.Content.ReadAsStringAsync().Result;
@@ -31,6 +30,8 @@ class WeatherCall{
                 Console.WriteLine("Error code: " + response.StatusCode);
                 return null;
             }
-        }  
+            
+        } 
+        
     }
 }
