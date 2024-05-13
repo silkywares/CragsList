@@ -1,0 +1,17 @@
+C:\Code\HelloWorld\bin\Debug\net6.0\main.exe
+C:\Code\HelloWorld\bin\Debug\net6.0\main.deps.json
+C:\Code\HelloWorld\bin\Debug\net6.0\main.runtimeconfig.json
+C:\Code\HelloWorld\bin\Debug\net6.0\main.dll
+C:\Code\HelloWorld\bin\Debug\net6.0\main.pdb
+C:\Code\HelloWorld\bin\Debug\net6.0\HtmlAgilityPack.dll
+C:\Code\HelloWorld\obj\Debug\net6.0\main.csproj.AssemblyReference.cache
+C:\Code\HelloWorld\obj\Debug\net6.0\main.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\HelloWorld\obj\Debug\net6.0\main.AssemblyInfoInputs.cache
+C:\Code\HelloWorld\obj\Debug\net6.0\main.AssemblyInfo.cs
+C:\Code\HelloWorld\obj\Debug\net6.0\main.csproj.CoreCompileInputs.cache
+C:\Code\HelloWorld\obj\Debug\net6.0\main.csproj.Up2Date
+C:\Code\HelloWorld\obj\Debug\net6.0\main.dll
+C:\Code\HelloWorld\obj\Debug\net6.0\refint\main.dll
+C:\Code\HelloWorld\obj\Debug\net6.0\main.pdb
+C:\Code\HelloWorld\obj\Debug\net6.0\main.genruntimeconfig.cache
+C:\Code\HelloWorld\obj\Debug\net6.0\ref\main.dll

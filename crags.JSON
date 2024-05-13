@@ -1,0 +1,34 @@
+[
+  {
+    "Latitude": 34.88999938964844,
+    "Longitude": -99.33000183105469,
+    "Latlon": "34.89777&lon=-99.33437",
+    "Url": "https://www.mountainproject.com/area/105854470/quartz-mountain",
+    "Name": "quartz mountain",
+    "Index": 1
+  },
+  {
+    "Latitude": 32.29999923706055,
+    "Longitude": -106.77999877929688,
+    "Latlon": "32.308&lon=-106.7871",
+    "Url": "https://www.mountainproject.com/area/106603617/las-cruces-area-climbing",
+    "Name": "las cruces",
+    "Index": 2
+  },
+  {
+    "Latitude": 32.34000015258789,
+    "Longitude": -106.54000091552734,
+    "Latlon": "32.34766&lon=-106.54415",
+    "Url": "https://www.mountainproject.com/area/108254627/sugarloaf-area",
+    "Name": "sugarloaf",
+    "Index": 3
+  },
+  {
+    "Latitude": 35.849998474121094,
+    "Longitude": -106.25,
+    "Latlon": "35.85376&lon=-106.25848",
+    "Url": "https://www.mountainproject.com/area/106009888/los-alamos-white-rock",
+    "Name": "los alamos white rock",
+    "Index": 4
+  }
+]
