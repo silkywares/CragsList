@@ -11,6 +11,7 @@ class CragManager{
     public List<Crag> crags;
     public float HomeLat;
     public float HomeLon;
+    public string HomeName = "Home1";
 
     public CragManager()
     {

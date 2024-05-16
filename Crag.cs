@@ -2,8 +2,8 @@ using System;
 
 public class Crag
 {
-    public double Latitude { get; set; }
-    public double Longitude { get; set; }
+    public float Latitude { get; set; }
+    public float Longitude { get; set; }
     public string Latlon { get; set; }
     public string Url { get; set; }
     public string Name { get; set; }

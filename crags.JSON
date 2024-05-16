@@ -1,6 +1,6 @@
 [
   {
-    "Latitude": 35.849998474121094,
+    "Latitude": 35.85,
     "Longitude": -106.25,
     "Latlon": "35.85376&lon=-106.25848",
     "Url": "https://www.mountainproject.com/area/106009888/los-alamos-white-rock",
@@ -8,59 +8,67 @@
     "Index": 1
   },
   {
-    "Latitude": 32.34700012207031,
-    "Longitude": -106.54399871826172,
+    "Latitude": 32.347,
+    "Longitude": -106.544,
     "Latlon": "32.34766&lon=-106.54415",
     "Url": "https://www.mountainproject.com/area/108254627/sugarloaf-area",
     "Name": "sugarloaf",
     "Index": 2
   },
   {
-    "Latitude": 41.72800064086914,
-    "Longitude": -74.18800354003906,
+    "Latitude": 41.728,
+    "Longitude": -74.188,
     "Latlon": "41.72879&lon=-74.18801",
     "Url": "https://www.mountainproject.com/area/105798818/the-trapps",
     "Name": "the trapps",
     "Index": 3
   },
   {
-    "Latitude": 39.930999755859375,
-    "Longitude": -105.28299713134766,
+    "Latitude": 39.931,
+    "Longitude": -105.283,
     "Latlon": "39.93149&lon=-105.28398",
     "Url": "https://www.mountainproject.com/area/105807689/redgarden-wall",
     "Name": "redgarden wall",
     "Index": 4
   },
   {
-    "Latitude": 36.12300109863281,
-    "Longitude": -115.49500274658203,
+    "Latitude": 36.123,
+    "Longitude": -115.495,
     "Latlon": "36.12399&lon=-115.49506",
     "Url": "https://www.mountainproject.com/area/115004598/dark-shadows-wall",
     "Name": "dark shadows wall",
     "Index": 5
   },
   {
-    "Latitude": 41.72800064086914,
-    "Longitude": -74.18800354003906,
+    "Latitude": 41.728,
+    "Longitude": -74.188,
     "Latlon": "41.72879&lon=-74.18801",
     "Url": "https://www.mountainproject.com/area/105798818/the-trapps",
     "Name": "the trapps",
     "Index": 6
   },
   {
-    "Latitude": 39.930999755859375,
-    "Longitude": -105.28299713134766,
+    "Latitude": 39.931,
+    "Longitude": -105.283,
     "Latlon": "39.93149&lon=-105.28398",
     "Url": "https://www.mountainproject.com/area/105807689/redgarden-wall",
     "Name": "redgarden wall",
     "Index": 7
   },
   {
-    "Latitude": 36.12300109863281,
-    "Longitude": -115.49500274658203,
+    "Latitude": 36.123,
+    "Longitude": -115.495,
     "Latlon": "36.12399&lon=-115.49506",
     "Url": "https://www.mountainproject.com/area/115004598/dark-shadows-wall",
     "Name": "dark shadows wall",
     "Index": 8
+  },
+  {
+    "Latitude": 24.776,
+    "Longitude": 110.489,
+    "Latlon": "24.77638&lon=110.48905",
+    "Url": "https://www.mountainproject.com/area/106763709/yangshuo",
+    "Name": "yangshuo",
+    "Index": 9
   }
 ]
