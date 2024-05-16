@@ -40,35 +40,11 @@
     "Index": 5
   },
   {
-    "Latitude": 41.728,
-    "Longitude": -74.188,
-    "Latlon": "41.72879&lon=-74.18801",
-    "Url": "https://www.mountainproject.com/area/105798818/the-trapps",
-    "Name": "the trapps",
-    "Index": 6
-  },
-  {
-    "Latitude": 39.931,
-    "Longitude": -105.283,
-    "Latlon": "39.93149&lon=-105.28398",
-    "Url": "https://www.mountainproject.com/area/105807689/redgarden-wall",
-    "Name": "redgarden wall",
-    "Index": 7
-  },
-  {
-    "Latitude": 36.123,
-    "Longitude": -115.495,
-    "Latlon": "36.12399&lon=-115.49506",
-    "Url": "https://www.mountainproject.com/area/115004598/dark-shadows-wall",
-    "Name": "dark shadows wall",
-    "Index": 8
-  },
-  {
     "Latitude": 24.776,
     "Longitude": 110.489,
     "Latlon": "24.77638&lon=110.48905",
     "Url": "https://www.mountainproject.com/area/106763709/yangshuo",
     "Name": "yangshuo",
-    "Index": 9
+    "Index": 6
   }
 ]

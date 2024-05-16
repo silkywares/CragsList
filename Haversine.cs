@@ -12,8 +12,13 @@ R_meters = 6.378E6
     public static double ReturnHaversineDistance(CragManager cragManager, int index){
         
         //calculates Δlat and Δlon
+        Console.WriteLine("Test lat: "+ cragManager.crags[index].Latitude);
+        Console.WriteLine("Test lon: "+ cragManager.crags[index].Longitude);
+
         float deltaLat = cragManager.crags[index].Latitude - cragManager.HomeLat;
+        deltaLat = deltaLat*(float)(Math.PI / 180.0);
         float deltaLon = cragManager.crags[index].Longitude - cragManager.HomeLon;
+        deltaLon = deltaLon*(float)(Math.PI / 180.0);
         //Console.WriteLine("\nFrome home to "+cragManager.crags[index].Name+" \nDelta lat: "+ deltaLat+"\n");
         //Console.WriteLine("\nFrome home to "+cragManager.crags[index].Name+" \nDelta lon: "+ deltaLon+"\n");
 

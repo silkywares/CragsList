@@ -26,18 +26,15 @@ class main
         crags.ListCrags();
 
         await crags.SetHomeLocation();
-        //Console.WriteLine("\nhomelat: "+crags.HomeLat+"\nhomelon: "+crags.HomeLon+"\n");
+        Console.WriteLine("\nhomelat: "+crags.HomeLat+"\nhomelon: "+crags.HomeLon+"\n");
 
         
         
-        for(int i = 1; i < 8; i++){
-            Haversine.ReturnHaversineDistance(crags,i);
-        }
+        // for(int i = 1; i < 9; i++){
+            Haversine.ReturnHaversineDistance(crags,1);
+        // }
         
-        
-        //Console.WriteLine("\nListing weather for crag #"+crags.crags[0].Index+" "+crags.crags[0].Name+"\n");
-        //string output = WeatherCall.wcall(crags.crags[1].Latlon);
-        //Console.WriteLine(output+"\n");
+      
     }
 }
         
