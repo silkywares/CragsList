@@ -2,17 +2,53 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 
 class CragManager{
     string filePath = "C:\\Code\\HelloWorld\\crags.json";
     public List<Crag> crags;
+    public float HomeLat;
+    public float HomeLon;
+
     public CragManager()
     {
         crags = new List<Crag>();
         crags = LoadFromJson();
     }
-    
+
+    public async Task SetHomeLocation()
+    {
+        try
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://ipinfo.io/json");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    // Parse the JSON response to extract latitude and longitude
+                    var data = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(content);
+                    string[] coordinates = data.loc.ToString().Split(',');
+                    double latitude = double.Parse(coordinates[0]);
+                    double longitude = double.Parse(coordinates[1]);
+                    //Console.WriteLine($"Approximate Latitude: {latitude}, Longitude: {longitude}");
+                    HomeLat = (float)latitude; // Set HomeLat
+                    HomeLon = (float)longitude; // Set HomeLon
+                }
+                else
+                {
+                    Console.WriteLine("Failed to retrieve location information.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
     public void SaveToJson()
     {
         Console.WriteLine("Saving crag to JSON.");

@@ -22,7 +22,9 @@ class main
 
         crags.ListCrags();
 
-        await CragParse.GetApproximateLocation();
+        await crags.SetHomeLocation();
+        Console.WriteLine("\nhomelat: "+crags.HomeLat+"\nhomelon: "+crags.HomeLon+"\n");
+
         
         //Console.WriteLine("\nListing weather for crag #"+crags.crags[0].Index+" "+crags.crags[0].Name+"\n");
         //string output = WeatherCall.wcall(crags.crags[1].Latlon);
