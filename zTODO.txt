@@ -1,2 +1,7 @@
 TODOS
 -call it cragslist
+
+16_may_todo
+-figure out the floating point error
+-make home location the 0 index crag
+-caclulate distance
