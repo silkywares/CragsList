@@ -30,9 +30,9 @@ class main
 
         
         
-        // for(int i = 1; i < 9; i++){
-            Haversine.ReturnHaversineDistance(crags,1);
-        // }
+        for(int i = 1; i < 6; i++){
+            Haversine.ReturnHaversineDistance(crags,i);
+        }
         
       
     }

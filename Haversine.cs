@@ -9,25 +9,30 @@ R_meters = 6.378E6
 
     const float EARTH_RADIUS_METERS = 6378000F;
 
-    public static double ReturnHaversineDistance(CragManager cragManager, int index){
-        
-        //calculates Δlat and Δlon
-        Console.WriteLine("Test lat: "+ cragManager.crags[index].Latitude);
-        Console.WriteLine("Test lon: "+ cragManager.crags[index].Longitude);
+    public static double ReturnHaversineDistance(CragManager cragManager, int index)
+    {
+        // Convert latitude and longitude from degrees to radians
+        float homeLatRad = (float)(cragManager.HomeLat * (Math.PI / 180.0));
+        float homeLonRad = (float)(cragManager.HomeLon * (Math.PI / 180.0));
+        float cragLatRad = (float)(cragManager.crags[index].Latitude * (Math.PI / 180.0));
+        float cragLonRad = (float)(cragManager.crags[index].Longitude * (Math.PI / 180.0));
 
-        float deltaLat = cragManager.crags[index].Latitude - cragManager.HomeLat;
-        deltaLat = deltaLat*(float)(Math.PI / 180.0);
-        float deltaLon = cragManager.crags[index].Longitude - cragManager.HomeLon;
-        deltaLon = deltaLon*(float)(Math.PI / 180.0);
-        //Console.WriteLine("\nFrome home to "+cragManager.crags[index].Name+" \nDelta lat: "+ deltaLat+"\n");
-        //Console.WriteLine("\nFrome home to "+cragManager.crags[index].Name+" \nDelta lon: "+ deltaLon+"\n");
+        // Calculate Δlat and Δlon
+        float deltaLat = cragLatRad - homeLatRad;
+        float deltaLon = cragLonRad - homeLonRad;
 
-        //calculate a
-        double a = Math.Sin(deltaLat/2)*Math.Sin(deltaLat/2)+Math.Cos(cragManager.crags[index].Latitude)*Math.Cos(cragManager.HomeLat)*Math.Sin(deltaLon/2)*Math.Sin(deltaLon/2);
-        double c = 2*Math.Atan(Math.Sqrt(a)/Math.Sqrt(1-a));
+        // Calculate a
+        double a = Math.Sin(deltaLat / 2) * Math.Sin(deltaLat / 2) +
+                Math.Cos(homeLatRad) * Math.Cos(cragLatRad) *
+                Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
+
+        // Calculate c
+        double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+        // Calculate distance
         double d = c * EARTH_RADIUS_METERS;
 
-        Console.WriteLine("Distance from "+cragManager.HomeName+" to "+cragManager.crags[index].Name+" is "+ d*.001f+"km.\n");
+        Console.WriteLine("Distance from " + cragManager.HomeName + " to " + cragManager.crags[index].Name + " is " + (d * 0.001) + " km.\n");
         return d;
     }
 
