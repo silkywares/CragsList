@@ -4,7 +4,7 @@
     "Longitude": -106.25,
     "Latlon": "35.85376&lon=-106.25848",
     "Url": "https://www.mountainproject.com/area/106009888/los-alamos-white-rock",
-    "Name": "los alamos white rock",
+    "Name": "Los Alamos White Rock",
     "Index": 1
   },
   {
@@ -12,7 +12,7 @@
     "Longitude": -106.544,
     "Latlon": "32.34766&lon=-106.54415",
     "Url": "https://www.mountainproject.com/area/108254627/sugarloaf-area",
-    "Name": "sugarloaf",
+    "Name": "Sugarloaf",
     "Index": 2
   },
   {
@@ -20,7 +20,7 @@
     "Longitude": -74.188,
     "Latlon": "41.72879&lon=-74.18801",
     "Url": "https://www.mountainproject.com/area/105798818/the-trapps",
-    "Name": "the trapps",
+    "Name": "The Trapps",
     "Index": 3
   },
   {
@@ -28,7 +28,7 @@
     "Longitude": -105.283,
     "Latlon": "39.93149&lon=-105.28398",
     "Url": "https://www.mountainproject.com/area/105807689/redgarden-wall",
-    "Name": "redgarden wall",
+    "Name": "Redgarden Wall",
     "Index": 4
   },
   {
@@ -36,7 +36,7 @@
     "Longitude": -115.495,
     "Latlon": "36.12399&lon=-115.49506",
     "Url": "https://www.mountainproject.com/area/115004598/dark-shadows-wall",
-    "Name": "dark shadows wall",
+    "Name": "Dark Shadows Wall",
     "Index": 5
   },
   {
@@ -44,7 +44,7 @@
     "Longitude": 110.489,
     "Latlon": "24.77638&lon=110.48905",
     "Url": "https://www.mountainproject.com/area/106763709/yangshuo",
-    "Name": "yangshuo",
+    "Name": "Yangshuo",
     "Index": 6
   }
 ]

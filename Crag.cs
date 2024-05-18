@@ -33,8 +33,8 @@ public class Crag
         Console.Write("\nConstructing... ");
         
         Url = url;
-        Name = CragParse.findName(url);
-        Latlon = CragParse.findGps(url);
-        (Latitude, Longitude) = CragParse.setLatLon(Latlon);
+        Name = CragParse.FindName(url);
+        Latlon = CragParse.FindGps(url);
+        (Latitude, Longitude) = CragParse.SetLatLon(Latlon);
     }
 }

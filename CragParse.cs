@@ -6,32 +6,48 @@ using System.Threading.Tasks;
 
 
 
+
 class CragParse
 {
     private const int DECIMAL_PRECISION = 4;
-    public static string findName(string url){
-        
-        int lastSlashIndex = url.LastIndexOf('/');
+   
 
-        if (lastSlashIndex != -1)
+public static string FindName(string url)
+{
+    int lastSlashIndex = url.LastIndexOf('/');
+
+    if (lastSlashIndex != -1)
+    {
+        // Trim off the last part of the URL
+        url = url.Substring(lastSlashIndex + 1);
+        url = url.Replace("-", " ");
+        url = url.Replace("area", "");
+        url = url.Replace("climbing", "");
+        url = url.TrimEnd();
+
+        // Capitalize the first letter of each word
+        string[] words = url.Split(' ');
+        for (int i = 0; i < words.Length; i++)
         {
-            // Trim off the last part of the URL
-            url = url.Substring(lastSlashIndex + 1);
-            url = url.Replace("-"," ");
-            url = url.Replace("area","");
-            url = url.Replace("climbing","");
-            url = url.TrimEnd();
+            if (words[i].Length > 0)
+            {
+                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+            }
+        }
+        url = string.Join(" ", words);
 
-            Console.Write(" | Name: " + url);
-            return url;
-        }
-        else{
-                Console.WriteLine("Invalid URL format");
-                return null;
-        }
+        Console.Write(" | Name: " + url);
+        return url;
     }
+    else
+    {
+        Console.WriteLine("Invalid URL format");
+        return null;
+    }
+}
 
-    public static string findGps(string url){
+
+    public static string FindGps(string url){
     
         using(HttpClient client = new HttpClient()){
 
@@ -59,7 +75,7 @@ class CragParse
         }
     }
 
-    public static (float, float) setLatLon(string latlon){
+    public static (float, float) SetLatLon(string latlon){
        
         //replace the api format with a comma
         latlon = latlon.Replace("&lon=",",");
@@ -87,7 +103,7 @@ class CragParse
         }
     }
 
-    public static async Task GetApproximateLocation()
+    public static async Task GetCurrentLocation()
     {
         try
         {
@@ -102,7 +118,7 @@ class CragParse
                     string[] coordinates = data.loc.ToString().Split(',');
                     double latitude = double.Parse(coordinates[0]);
                     double longitude = double.Parse(coordinates[1]);
-                    Console.WriteLine($"Approximate Latitude: {latitude}, Longitude: {longitude}");
+                    Console.WriteLine($"Approximate Latitude: {latitude:F3}, Longitude: {longitude:F3}");
                 }
                 else
                 {

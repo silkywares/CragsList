@@ -14,26 +14,24 @@ class main
         Crag test = new Crag("https://www.mountainproject.com/area/105798818/the-trapps");
         Crag test1 = new Crag("https://www.mountainproject.com/area/105807689/redgarden-wall");
         Crag test2 = new Crag("https://www.mountainproject.com/area/115004598/dark-shadows-wall");
-        
-        
+        Crag test3 = new Crag("https://www.mountainproject.com/area/106763709/yangshuo");
         crags.AddCrag(test);
         crags.AddCrag(test1);
-        
-        Crag test3 = new Crag("https://www.mountainproject.com/area/106763709/yangshuo");
+        crags.AddCrag(test2);
         crags.AddCrag(test3);
         */
 
         crags.ListCrags();
 
         await crags.SetHomeLocation();
-        Console.WriteLine("\nhomelat: "+crags.HomeLat+"\nhomelon: "+crags.HomeLon+"\n");
+        Console.WriteLine($"\nhomelat: {crags.HomeLat:F1}\nhomelon: {crags.HomeLon:F1}\n");
 
         
         
-        for(int i = 1; i < 6; i++){
+        for(int i = 0; i < 6; i++){
             Haversine.ReturnHaversineDistance(crags,i);
         }
-        
+        Console.WriteLine();
       
     }
 }
