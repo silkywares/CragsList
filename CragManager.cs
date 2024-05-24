@@ -18,7 +18,6 @@ class CragManager{
         crags = new List<Crag>();
         crags = LoadFromJson();
     }
-
     public async Task SetHomeLocation()
     {
         try
@@ -49,7 +48,13 @@ class CragManager{
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
+    public void SetDistanceToHome(){
+        int y = 0;
+        foreach (Crag i in crags){
+            Console.WriteLine(y++);
+        }
 
+    }
     public void SaveToJson()
     {
         Console.WriteLine("Saving crag to JSON.");
@@ -59,7 +64,6 @@ class CragManager{
         // Write the JSON data to the file (overwrite existing content)
         File.WriteAllText(filePath, json);
     }
-
     public List<Crag> LoadFromJson()
     {
         try
@@ -74,7 +78,6 @@ class CragManager{
             return new List<Crag>(); // Return an empty list to avoid returning null
         }
     }
-
     public void AddCrag(Crag crag)
     {
         // Determine the index value for the new crag
@@ -89,7 +92,6 @@ class CragManager{
         // Save the updated crags list to JSON
         SaveToJson();
     }
-
     public void RemoveCrag(int cragIndex)
     {
         // Load data from JSON file
@@ -116,7 +118,6 @@ class CragManager{
             Console.WriteLine("Invalid index.");
         }
     }
-
     public void ListCrags(){
         Console.WriteLine("\n\nListing crags saved: # " + crags.Count);
             for (int i = 0; i < crags.Count; i++)

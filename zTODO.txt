@@ -10,3 +10,6 @@ TODOS
 -figure out distance sort from home
 -function to accept distance parameter and display crags within that distance
 -standard conversions to miles
+
+23_may_todo
+-figure out the html scrape issue for all constructs.

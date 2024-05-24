@@ -8,6 +8,7 @@ public class Crag
     public string Url { get; set; }
     public string Name { get; set; }
     public int Index{get; set;}
+    public float DistanceToHome{get; set;}
 
     public struct CurrentWeather
     {
@@ -36,5 +37,9 @@ public class Crag
         Name = CragParse.FindName(url);
         Latlon = CragParse.FindGps(url);
         (Latitude, Longitude) = CragParse.SetLatLon(Latlon);
+    }
+
+    public Crag(){
+        Console.WriteLine("\nConstructing from JSON... ");
     }
 }

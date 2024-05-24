@@ -10,71 +10,66 @@ using System.Threading.Tasks;
 class CragParse
 {
     private const int DECIMAL_PRECISION = 4;
-   
-
-public static string FindName(string url)
-{
-    int lastSlashIndex = url.LastIndexOf('/');
-
-    if (lastSlashIndex != -1)
+    public static string FindName(string url)
     {
-        // Trim off the last part of the URL
-        url = url.Substring(lastSlashIndex + 1);
-        url = url.Replace("-", " ");
-        url = url.Replace("area", "");
-        url = url.Replace("climbing", "");
-        url = url.TrimEnd();
+        int lastSlashIndex = url.LastIndexOf('/');
 
-        // Capitalize the first letter of each word
-        string[] words = url.Split(' ');
-        for (int i = 0; i < words.Length; i++)
+        if (lastSlashIndex != -1)
         {
-            if (words[i].Length > 0)
+            // Trim off the last part of the URL
+            url = url.Substring(lastSlashIndex + 1);
+            url = url.Replace("-", " ");
+            url = url.Replace("area", "");
+            url = url.Replace("climbing", "");
+            url = url.TrimEnd();
+
+            // Capitalize the first letter of each word
+            string[] words = url.Split(' ');
+            for (int i = 0; i < words.Length; i++)
             {
-                words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                if (words[i].Length > 0)
+                {
+                    words[i] = char.ToUpper(words[i][0]) + words[i].Substring(1).ToLower();
+                }
             }
+            url = string.Join(" ", words);
+
+            Console.Write(" | Name: " + url);
+            return url;
         }
-        url = string.Join(" ", words);
-
-        Console.Write(" | Name: " + url);
-        return url;
+        else
+        {
+            Console.WriteLine("Invalid URL format");
+            return null;
+        }
     }
-    else
-    {
-        Console.WriteLine("Invalid URL format");
-        return null;
-    }
-}
-
-
     public static string FindGps(string url){
-    
-        using(HttpClient client = new HttpClient()){
+        
+            using(HttpClient client = new HttpClient()){
 
-            HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+                HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
 
-            if(response.IsSuccessStatusCode){
-                
-                //Saves the HTML contents as a string and loads them into an HtmlDocument
-                string htmlContent = response.Content.ReadAsStringAsync().Result;
-                HtmlDocument document = new HtmlDocument();
-                document.LoadHtml(htmlContent);
+                if(response.IsSuccessStatusCode){
+                    
+                    //Saves the HTML contents as a string and loads them into an HtmlDocument
+                    string htmlContent = response.Content.ReadAsStringAsync().Result;
+                    HtmlDocument document = new HtmlDocument();
+                    document.LoadHtml(htmlContent);
 
-                // Extract GPS data using XPath
-                HtmlNode gpsNode = document.DocumentNode.SelectSingleNode("//td[contains(text(), 'GPS:')]/following-sibling::td/text()[1]");
-                string gpsData = gpsNode?.InnerText.Trim();
-                gpsData = gpsData.Replace(" ", "&lon="); // Remove the space
-                gpsData = gpsData.Replace(",", ""); // Remove the comma
+                    // Extract GPS data using XPath
+                    HtmlNode gpsNode = document.DocumentNode.SelectSingleNode("//td[contains(text(), 'GPS:')]/following-sibling::td/text()[1]");
+                    string gpsData = gpsNode?.InnerText.Trim();
+                    gpsData = gpsData.Replace(" ", "&lon="); // Remove the space
+                    gpsData = gpsData.Replace(",", ""); // Remove the comma
 
-                return gpsData;
-            }
-            else{
-                Console.WriteLine("Error code: " + response.StatusCode);
-                return null;
+                    return gpsData;
+                }
+                else{
+                    Console.WriteLine("Error code: " + response.StatusCode);
+                    return null;
+                }
             }
         }
-    }
-
     public static (float, float) SetLatLon(string latlon){
        
         //replace the api format with a comma
@@ -102,7 +97,6 @@ public static string FindName(string url)
             return (-999.9F,-999.9F);
         }
     }
-
     public static async Task GetCurrentLocation()
     {
         try
@@ -131,6 +125,5 @@ public static string FindName(string url)
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
-
 
 }

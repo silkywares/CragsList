@@ -21,17 +21,17 @@ class main
         crags.AddCrag(test3);
         */
 
-        crags.ListCrags();
+        // crags.ListCrags();
 
-        await crags.SetHomeLocation();
-        Console.WriteLine($"\nhomelat: {crags.HomeLat:F1}\nhomelon: {crags.HomeLon:F1}\n");
+        //await crags.SetHomeLocation();
+        // Console.WriteLine($"\nhomelat: {crags.HomeLat:F1}\nhomelon: {crags.HomeLon:F1}\n");
 
         
         
-        for(int i = 0; i < 6; i++){
-            Haversine.ReturnHaversineDistance(crags,i);
-        }
-        Console.WriteLine();
+        // for(int i = 0; i < 6; i++){
+            // Haversine.ReturnHaversineDistance(crags,i);
+        // }
+        crags.SetDistanceToHome();
       
     }
 }
