@@ -8,7 +8,8 @@ class main
         Console.WriteLine("\nRunning main thread...");
         CragManager cragManager = new CragManager();
         await cragManager.SetHomeLocation();
-        
+        cragManager.SetDistanceToHome();
+
         // Console.WriteLine("\n\nAdding Crags");
         // Crag test = new Crag("https://www.mountainproject.com/area/105798818/the-trapps");
         // Crag test1 = new Crag("https://www.mountainproject.com/area/105807689/redgarden-wall");
@@ -19,10 +20,6 @@ class main
         // cragManager.AddCrag(test2);
         // cragManager.AddCrag(test3);
         // crags.ListCrags();
-
-         
-            cragManager.SetDistanceToHome();
-
 
     }
 }

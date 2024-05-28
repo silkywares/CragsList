@@ -75,13 +75,6 @@ class CragManager{
             return new List<Crag>(); // Return an empty list to avoid returning null
         }
     }
-    public void ListCrags(){
-        Console.WriteLine("\n\nListing crags saved: # " + crags.Count);
-            for (int i = 0; i < crags.Count; i++)
-            {
-                Console.WriteLine("Crag " + crags[i].Index + ": " + crags[i].Name);
-            }
-    }
     public static async Task GetCurrentLocation(){
         try
         {
@@ -109,8 +102,7 @@ class CragManager{
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
-    public async Task SetHomeLocation()
-    {
+    public async Task SetHomeLocation(){
         try
         {
             using (var client = new HttpClient())
@@ -140,7 +132,7 @@ class CragManager{
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
-    public double SetHaversineDistance(Crag crag){
+    double SetHaversineDistance(Crag crag){
     
         float homeLatRad = (float)(HomeLat * (Math.PI / 180.0));
         float homeLonRad = (float)(HomeLon * (Math.PI / 180.0));
