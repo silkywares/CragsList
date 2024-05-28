@@ -143,12 +143,12 @@ class CragManager{
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
-    public double ReturnHaversineDistance(int index){
+    public double SetHaversineDistance(Crag crag){
     
         float homeLatRad = (float)(HomeLat * (Math.PI / 180.0));
         float homeLonRad = (float)(HomeLon * (Math.PI / 180.0));
-        float cragLatRad = (float)(crags[index].Latitude * (Math.PI / 180.0));
-        float cragLonRad = (float)(crags[index].Longitude * (Math.PI / 180.0));
+        float cragLatRad = (float)(crag.Latitude * (Math.PI / 180.0));
+        float cragLonRad = (float)(crag.Longitude * (Math.PI / 180.0));
 
         float deltaLat = cragLatRad - homeLatRad;
         float deltaLon = cragLonRad - homeLonRad;
@@ -162,13 +162,14 @@ class CragManager{
         // Calculate distance
         double distance = c * EARTH_RADIUS_METERS;
 
-        Console.WriteLine($"{HomeName} to {crags[index].Name} : {distance * 0.000001:F3} Mm.");
+        Console.WriteLine($"{HomeName} to {crag.Name} : {distance * 0.000001:F3} Mm.");
         return distance;
     }
     public void SetDistanceToHome(){
 
             foreach (Crag crag in crags){
-                
+                crag.DistanceToHome = SetHaversineDistance(crag);
+                Console.WriteLine($"{HomeName} to {crag.Name} : {crag.DistanceToHome * 0.000001:F3} Mm.");
             }
     }
 }

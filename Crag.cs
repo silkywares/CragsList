@@ -32,7 +32,7 @@ public class Crag
     public string Url { get; set; }
     public string Name { get; set; }
     public int Index{get; set;}
-    public float DistanceToHome{get; set;}
+    public double DistanceToHome{get; set;}
     
     public Crag(string url){
         Console.WriteLine("Constructing with url... ");
