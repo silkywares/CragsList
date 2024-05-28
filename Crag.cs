@@ -8,14 +8,6 @@ using System.Threading.Tasks;
 public class Crag
 {
     private const int DECIMAL_PRECISION = 4;
-    public float Latitude { get; set; }
-    public float Longitude { get; set; }
-    public string Latlon { get; set; }
-    public string Url { get; set; }
-    public string Name { get; set; }
-    public int Index{get; set;}
-    public float DistanceToHome{get; set;}
-
     public struct CurrentWeather
     {
         public long DateTime { get; set; }
@@ -34,21 +26,24 @@ public class Crag
         public double WindGust { get; set; }
         //public WeatherDescription[] WeatherDescriptions { get; set; }
     }
-
-    public Crag(string url)
-    {
-        Console.Write("\nConstructing... ");
-        
+    public float Latitude { get; set; }
+    public float Longitude { get; set; }
+    public string Latlon { get; set; }
+    public string Url { get; set; }
+    public string Name { get; set; }
+    public int Index{get; set;}
+    public float DistanceToHome{get; set;}
+    
+    public Crag(string url){
+        Console.WriteLine("Constructing with url... ");
         Url = url;
         Name = FindName(url);
         Latlon = FindGps(url);
         (Latitude, Longitude) = SetLatLon(Latlon);
     }
-
     public Crag(){
-        Console.WriteLine("\nConstructing from JSON... ");
+        Console.WriteLine("Constructing from JSON... ");
     }
-
     public static (float, float) SetLatLon(string latlon){
     
     //replace the api format with a comma
@@ -76,8 +71,6 @@ public class Crag
         return (-999.9F,-999.9F);
     }
 }
-
-
     public static string FindName(string url)
     {
         int lastSlashIndex = url.LastIndexOf('/');
@@ -127,10 +120,10 @@ public class Crag
                     // Extract GPS data using XPath
                     HtmlNode gpsNode = document.DocumentNode.SelectSingleNode("//td[contains(text(), 'GPS:')]/following-sibling::td/text()[1]");
                     string gpsData = gpsNode?.InnerText.Trim();
-                    gpsData = gpsData.Replace(" ", "&lon="); // Remove the space
-                    gpsData = gpsData.Replace(",", ""); // Remove the comma
+                    gpsData = gpsData.Replace(", ", "&lon="); // Remove the space
+                    // gpsData = gpsData.Replace(",", ""); // Remove the comma
 
-                    return gpsData;
+                    return gpsData; //32.222&lon=-122.023
                 }
                 else{
                     Console.WriteLine("Error code: " + response.StatusCode);
@@ -138,7 +131,20 @@ public class Crag
                 }
             }
         }
+    public string WeatherCaller(){
+        using(HttpClient client = new HttpClient()){
+            Console.WriteLine("Reaching out to OpenWeather!\n");
+            
+            string apiUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + Latlon + "&exclude=hourly,minutely,daily,alerts&appid=45e62891196b886baf19eb0f2efde345";
+            HttpResponseMessage response = client.GetAsync(apiUrl).GetAwaiter().GetResult();
 
-
-
+            if(response.IsSuccessStatusCode){
+                return response.Content.ReadAsStringAsync().Result;
+            }
+            else{
+                Console.WriteLine("Error code: " + response.StatusCode);
+                return null;
+            } 
+        } 
+    }
 }

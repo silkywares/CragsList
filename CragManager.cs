@@ -7,55 +7,19 @@ using System.Net.Http;
 
 
 class CragManager{
+    const float EARTH_RADIUS_METERS = 6378000F;
     string filePath = "C:\\Code\\HelloWorld\\crags.json";
     public List<Crag> crags;
     public float HomeLat;
     public float HomeLon;
     public string HomeName = "Home1";
 
-    public CragManager()
-    {
+    public CragManager(){
         crags = new List<Crag>();
         crags = LoadFromJson();
     }
-    public async Task SetHomeLocation()
-    {
-        try
-        {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync("https://ipinfo.io/json");
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    // Parse the JSON response to extract latitude and longitude
-                    var data = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(content);
-                    string[] coordinates = data.loc.ToString().Split(',');
-                    double latitude = double.Parse(coordinates[0]);
-                    double longitude = double.Parse(coordinates[1]);
-                    //Console.WriteLine($"Approximate Latitude: {latitude}, Longitude: {longitude}");
-                    HomeLat = (float)latitude; // Set HomeLat
-                    HomeLon = (float)longitude; // Set HomeLon
-                }
-                else
-                {
-                    Console.WriteLine("Failed to retrieve location information.");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
-        }
-    }
-    public void SetDistanceToHome(){
-        int y = 0;
-        foreach (Crag i in crags){
-            Console.WriteLine(y++);
-        }
-    }
-    public void SaveToJson()
-    {
+    
+    void SaveToJson(){
         Console.WriteLine("Saving crag to JSON.");
         // Serialize the crags list to JSON
         string json = JsonConvert.SerializeObject(crags, Formatting.Indented);
@@ -63,8 +27,7 @@ class CragManager{
         // Write the JSON data to the file (overwrite existing content)
         File.WriteAllText(filePath, json);
     }
-    public List<Crag> LoadFromJson()
-    {
+    List<Crag> LoadFromJson(){
         try
         {
             Console.WriteLine("\nLoading crags from JSON into CragManager.");
@@ -77,8 +40,7 @@ class CragManager{
             return new List<Crag>(); // Return an empty list to avoid returning null
         }
     }
-    public void AddCrag(Crag crag)
-    {
+    public void AddCrag(Crag crag){
         // Determine the index value for the new crag
         int lastIndex = crags.Count > 0 ? crags[crags.Count - 1].Index : 0;
         crag.Index = lastIndex + 1;
@@ -91,8 +53,7 @@ class CragManager{
         // Save the updated crags list to JSON
         SaveToJson();
     }
-    public void RemoveCrag(int cragIndex)
-    {
+    void RemoveCrag(int cragIndex){
         // Load data from JSON file
         List<Crag> cragsList = JsonConvert.DeserializeObject<List<Crag>>(File.ReadAllText(filePath));
 
@@ -124,8 +85,7 @@ class CragManager{
                 Console.WriteLine("Crag " + crags[i].Index + ": " + crags[i].Name);
             }
     }
-    public static async Task GetCurrentLocation()
-    {
+    public static async Task GetCurrentLocation(){
         try
         {
             using (var client = new HttpClient())
@@ -151,5 +111,64 @@ class CragManager{
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
+    }
+    public async Task SetHomeLocation()
+    {
+        try
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://ipinfo.io/json");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    // Parse the JSON response to extract latitude and longitude
+                    var data = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(content);
+                    string[] coordinates = data.loc.ToString().Split(',');
+                    double latitude = double.Parse(coordinates[0]);
+                    double longitude = double.Parse(coordinates[1]);
+                    //Console.WriteLine($"Approximate Latitude: {latitude}, Longitude: {longitude}");
+                    HomeLat = (float)latitude; // Set HomeLat
+                    HomeLon = (float)longitude; // Set HomeLon
+                    Console.WriteLine($"HomeLat ={HomeLat} HomeLon=={HomeLat}");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to retrieve location information.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+    public double ReturnHaversineDistance(int index){
+    
+        float homeLatRad = (float)(HomeLat * (Math.PI / 180.0));
+        float homeLonRad = (float)(HomeLon * (Math.PI / 180.0));
+        float cragLatRad = (float)(crags[index].Latitude * (Math.PI / 180.0));
+        float cragLonRad = (float)(crags[index].Longitude * (Math.PI / 180.0));
+
+        float deltaLat = cragLatRad - homeLatRad;
+        float deltaLon = cragLonRad - homeLonRad;
+
+        double a = Math.Sin(deltaLat / 2) * Math.Sin(deltaLat / 2) +
+                Math.Cos(homeLatRad) * Math.Cos(cragLatRad) *
+                Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
+
+        double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+        // Calculate distance
+        double distance = c * EARTH_RADIUS_METERS;
+
+        Console.WriteLine($"{HomeName} to {crags[index].Name} : {distance * 0.000001:F3} Mm.");
+        return distance;
+    }
+    public void SetDistanceToHome(){
+
+            foreach (Crag crag in crags){
+                
+            }
     }
 }
