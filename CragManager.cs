@@ -12,33 +12,11 @@ class CragManager{
     public List<Crag> crags;
     public float HomeLat;
     public float HomeLon;
-    public string HomeName = "Home1";
+    public string HomeName = "Home";
 
     public CragManager(){
         crags = new List<Crag>();
         crags = LoadFromJson();
-    }
-    
-    void SaveToJson(){
-        Console.WriteLine("Saving crag to JSON.");
-        // Serialize the crags list to JSON
-        string json = JsonConvert.SerializeObject(crags, Formatting.Indented);
-
-        // Write the JSON data to the file (overwrite existing content)
-        File.WriteAllText(filePath, json);
-    }
-    List<Crag> LoadFromJson(){
-        try
-        {
-            Console.WriteLine("\nLoading crags from JSON into CragManager.");
-            string json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<List<Crag>>(json);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error loading crags from JSON: " + ex.Message);
-            return new List<Crag>(); // Return an empty list to avoid returning null
-        }
     }
     public void AddCrag(Crag crag){
         // Determine the index value for the new crag
@@ -76,6 +54,25 @@ class CragManager{
         else
         {
             Console.WriteLine("Invalid index.");
+        }
+    }
+    void SaveToJson(){
+        Console.WriteLine("Saving crags to JSON.");
+        string json = JsonConvert.SerializeObject(crags, Formatting.Indented);
+
+        File.WriteAllText(filePath, json);// Write the JSON data to the file (overwrite existing content)
+    }
+    List<Crag> LoadFromJson(){
+        try
+        {
+            Console.WriteLine("\nLoading crags from JSON into CragManager.");
+            string json = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<List<Crag>>(json);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error loading crags from JSON: " + ex.Message);
+            return new List<Crag>(); // Return an empty list to avoid returning null
         }
     }
     public void ListCrags(){
@@ -159,17 +156,17 @@ class CragManager{
 
         double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
 
-        // Calculate distance
         double distance = c * EARTH_RADIUS_METERS;
 
-        Console.WriteLine($"{HomeName} to {crag.Name} : {distance * 0.000001:F3} Mm.");
+        //Console.WriteLine($"{HomeName} to {crag.Name} : {distance * 0.000001:F3} Mm.");
         return distance;
     }
     public void SetDistanceToHome(){
-
+            //This function will override all of the DistanceToHomes for each crag and saves
             foreach (Crag crag in crags){
                 crag.DistanceToHome = SetHaversineDistance(crag);
-                Console.WriteLine($"{HomeName} to {crag.Name} : {crag.DistanceToHome * 0.000001:F3} Mm.");
+                Console.WriteLine($"Distance from {HomeName} to {crag.Name} : {crag.DistanceToHome * 0.000001:F3} Mm.");
             }
+            SaveToJson();
     }
 }

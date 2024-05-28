@@ -63,7 +63,7 @@ public class Crag
         parts[1] = parts[1].Substring(0, decimalIndex_1 + DECIMAL_PRECISION);
         float lat = float.Parse(parts[0]);
         float lon = float.Parse(parts[1]);
-        Console.Write(" | Lat: " + parts[0] + " Lon: " + parts[1]);
+        //Console.Write(" | Lat: " + parts[0] + " Lon: " + parts[1]);
         return (lat, lon);
         
     }
@@ -95,7 +95,7 @@ public class Crag
             }
             url = string.Join(" ", words);
 
-            Console.Write(" | Name: " + url);
+            // Console.Write(" | Name: " + url);
             return url;
         }
         else
@@ -112,18 +112,16 @@ public class Crag
 
                 if(response.IsSuccessStatusCode){
                     
-                    //Saves the HTML contents as a string and loads them into an HtmlDocument
-                    string htmlContent = response.Content.ReadAsStringAsync().Result;
                     HtmlDocument document = new HtmlDocument();
+                    string htmlContent = response.Content.ReadAsStringAsync().Result;
                     document.LoadHtml(htmlContent);
 
                     // Extract GPS data using XPath
                     HtmlNode gpsNode = document.DocumentNode.SelectSingleNode("//td[contains(text(), 'GPS:')]/following-sibling::td/text()[1]");
                     string gpsData = gpsNode?.InnerText.Trim();
-                    gpsData = gpsData.Replace(", ", "&lon="); // Remove the space
-                    // gpsData = gpsData.Replace(",", ""); // Remove the comma
+                    gpsData = gpsData.Replace(", ", "&lon=");
 
-                    return gpsData; //32.222&lon=-122.023
+                    return gpsData;
                 }
                 else{
                     Console.WriteLine("Error code: " + response.StatusCode);
