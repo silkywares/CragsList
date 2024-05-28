@@ -3,8 +3,8 @@ TODOS
 
 16_may_todo
 -figure out the floating point error---
--make home location the 0 index crag
--caclulate distance---
+-!make home location the 0 index crag
+-.caclulate distance---
 
 18_may_todo
 -figure out distance sort from home

@@ -53,7 +53,6 @@ class CragManager{
         foreach (Crag i in crags){
             Console.WriteLine(y++);
         }
-
     }
     public void SaveToJson()
     {
@@ -125,5 +124,32 @@ class CragManager{
                 Console.WriteLine("Crag " + crags[i].Index + ": " + crags[i].Name);
             }
     }
-
+    public static async Task GetCurrentLocation()
+    {
+        try
+        {
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync("https://ipinfo.io/json");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    // Parse the JSON response to extract latitude and longitude
+                    var data = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(content);
+                    string[] coordinates = data.loc.ToString().Split(',');
+                    double latitude = double.Parse(coordinates[0]);
+                    double longitude = double.Parse(coordinates[1]);
+                    Console.WriteLine($"Approximate Latitude: {latitude:F3}, Longitude: {longitude:F3}");
+                }
+                else
+                {
+                    Console.WriteLine("Failed to retrieve location information.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
 }
