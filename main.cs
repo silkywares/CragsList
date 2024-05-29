@@ -8,8 +8,10 @@ class main
         Console.WriteLine("\nRunning main thread...");
         CragManager cragManager = new CragManager();
         await cragManager.SetHomeLocation();
-        // cragManager.SetDistanceToHome();
-        Console.WriteLine(Weather.GetWeather(cragManager.crags[1])+"\n");
-    }
+        // cragManager.SetDistanceToHome();  
+        
+        await Weather.GetWeather(cragManager.crags[1]);
+
+        }
 }
         
