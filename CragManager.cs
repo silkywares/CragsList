@@ -139,9 +139,6 @@ class CragManager{
             await crag.UpdateWeather();
         }
     }
-   
-   
-   
     public void AddTestCrags(){
         Crag test0 = new Crag("https://www.mountainproject.com/area/105837312/reimers-ranch");
         Crag test1 = new Crag("https://www.mountainproject.com/area/105858670/wichita-mountains-wildlife-refuge");

@@ -2,7 +2,6 @@ using System;
 using System.Text.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Text.Json.Serialization;
 
 class Weather{
 

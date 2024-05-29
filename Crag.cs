@@ -27,6 +27,7 @@ public class Crag
     public double DistanceToHome{get; set;}
     private const int DECIMAL_PRECISION = 4;
     public WeatherResponse WeatherData { get; private set; }
+    
     public struct WeatherResponse{
         [JsonPropertyName("lat")]
         public double Lat { get; set; }
@@ -102,6 +103,7 @@ public class Crag
         [JsonPropertyName("icon")]
         public string Icon { get; set; }
     }
+    
     public static (float, float) SetLatLon(string latlon){
     
     //replace the api format with a comma
@@ -186,8 +188,7 @@ public class Crag
                     return null;
                 }
             }
-        }
-    
+        }  
     public async Task  UpdateWeather(){
         string update = await Weather.GetWeather(this);
         WeatherData = JsonSerializer.Deserialize<WeatherResponse>(update);
