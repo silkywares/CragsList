@@ -16,3 +16,9 @@ TODOS
 
 28_may_todo
 
+29_may_todo
+-parse the weather data into something useful
+-possible functions list
+--return all crags within x distance
+--return all crags with y weather condition
+

@@ -8,7 +8,7 @@ using System.Net.Http;
 
 class CragManager{
     const float EARTH_RADIUS_METERS = 6378000F;
-    string filePath = "C:\\Code\\HelloWorld\\crags.json";
+    string FilePath = "C:\\Code\\HelloWorld\\crags.json";
     public List<Crag> crags;
     public float HomeLat;
     public float HomeLon;
@@ -25,15 +25,14 @@ class CragManager{
 
         Console.WriteLine("\nAdding #"+crag.Index +" "+ crag.Name + " to list.");
         
-        // Add the new crag to the list
+
         crags.Add(crag);
         
-        // Save the updated crags list to JSON
         SaveToJson();
     }
     void RemoveCrag(int cragIndex){
         // Load data from JSON file
-        List<Crag> cragsList = JsonConvert.DeserializeObject<List<Crag>>(File.ReadAllText(filePath));
+        List<Crag> cragsList = JsonConvert.DeserializeObject<List<Crag>>(File.ReadAllText(FilePath));
 
         if (cragIndex >= 0 && cragIndex < cragsList.Count)
         {
@@ -44,7 +43,7 @@ class CragManager{
             string json = JsonConvert.SerializeObject(cragsList, Formatting.Indented);
 
             // Write the JSON data back to the file
-            File.WriteAllText(filePath, json);
+            File.WriteAllText(FilePath, json);
 
             crags = cragsList;
 
@@ -60,46 +59,19 @@ class CragManager{
         Console.WriteLine("Saving crags to JSON.");
         string json = JsonConvert.SerializeObject(crags, Formatting.Indented);
 
-        File.WriteAllText(filePath, json);// Write the JSON data to the file (overwrite existing content)
+        File.WriteAllText(FilePath, json);// Write the JSON data to the file (overwrite existing content)
     }
     List<Crag> LoadFromJson(){
         try
         {
             Console.WriteLine("\nLoading crags from JSON into CragManager.");
-            string json = File.ReadAllText(filePath);
+            string json = File.ReadAllText(FilePath);
             return JsonConvert.DeserializeObject<List<Crag>>(json);
         }
         catch (Exception ex)
         {
             Console.WriteLine("Error loading crags from JSON: " + ex.Message);
             return new List<Crag>(); // Return an empty list to avoid returning null
-        }
-    }
-    public static async Task GetCurrentLocation(){
-        try
-        {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync("https://ipinfo.io/json");
-                if (response.IsSuccessStatusCode)
-                {
-                    var content = await response.Content.ReadAsStringAsync();
-                    // Parse the JSON response to extract latitude and longitude
-                    var data = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(content);
-                    string[] coordinates = data.loc.ToString().Split(',');
-                    double latitude = double.Parse(coordinates[0]);
-                    double longitude = double.Parse(coordinates[1]);
-                    Console.WriteLine($"Approximate Latitude: {latitude:F3}, Longitude: {longitude:F3}");
-                }
-                else
-                {
-                    Console.WriteLine("Failed to retrieve location information.");
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An error occurred: {ex.Message}");
         }
     }
     public async Task SetHomeLocation(){
@@ -119,7 +91,7 @@ class CragManager{
                     //Console.WriteLine($"Approximate Latitude: {latitude}, Longitude: {longitude}");
                     HomeLat = (float)latitude; // Set HomeLat
                     HomeLon = (float)longitude; // Set HomeLon
-                    Console.WriteLine($"HomeLat ={HomeLat} HomeLon=={HomeLat}");
+                    Console.WriteLine($"\nHomeLat:{HomeLat} HomeLon:{HomeLat}");
                 }
                 else
                 {
@@ -155,10 +127,25 @@ class CragManager{
     }
     public void SetDistanceToHome(){
             //This function will override all of the DistanceToHomes for each crag and saves
+            Console.WriteLine();
             foreach (Crag crag in crags){
                 crag.DistanceToHome = SetHaversineDistance(crag);
                 Console.WriteLine($"Distance from {HomeName} to {crag.Name} : {crag.DistanceToHome * 0.000001:F3} Mm.");
             }
             SaveToJson();
+    }
+    public void AddTestCrags(){
+        Crag test0 = new Crag("https://www.mountainproject.com/area/105837312/reimers-ranch");
+        Crag test1 = new Crag("https://www.mountainproject.com/area/105858670/wichita-mountains-wildlife-refuge");
+        Crag test2 = new Crag("https://www.mountainproject.com/area/105833388/yosemite-valley");
+        Crag test3 = new Crag("https://www.mountainproject.com/area/105910764/el-potrero-chico");
+        Crag test4 = new Crag("https://www.mountainproject.com/area/106763709/yangshuo");
+
+
+        AddCrag(test0);
+        AddCrag(test1);
+        AddCrag(test2);
+        AddCrag(test3);
+        AddCrag(test4);
     }
 }
