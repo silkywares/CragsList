@@ -10,8 +10,7 @@ class main
         await cragManager.SetHomeLocation();
         // cragManager.SetDistanceToHome();  
         
-        await Weather.GetWeather(cragManager.crags[1]);
-
+        await cragManager.UpdateWeatherAll();
         }
 }
         

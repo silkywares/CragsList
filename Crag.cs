@@ -1,38 +1,13 @@
 using System;
-
+using System.Text.Json;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 using HtmlAgilityPack;
 
 
 public class Crag
 {
-    private const int DECIMAL_PRECISION = 4;
-    public struct CurrentWeather
-    {
-        public long DateTime { get; set; }
-        public long Sunrise { get; set; }
-        public long Sunset { get; set; }
-        public double Temperature { get; set; }
-        public double FeelsLike { get; set; }
-        public int Pressure { get; set; }
-        public int Humidity { get; set; }
-        public double DewPoint { get; set; }
-        public double UVIndex { get; set; }
-        public int Clouds { get; set; }
-        public int Visibility { get; set; }
-        public double WindSpeed { get; set; }
-        public int WindDegrees { get; set; }
-        public double WindGust { get; set; }
-        //public WeatherDescription[] WeatherDescriptions { get; set; }
-    }
-    public float Latitude { get; set; }
-    public float Longitude { get; set; }
-    public string Latlon { get; set; }
-    public string Url { get; set; }
-    public string Name { get; set; }
-    public int Index{get; set;}
-    public double DistanceToHome{get; set;}
-    
     public Crag(string url){
         Console.WriteLine("Constructing with url... ");
         Url = url;
@@ -42,6 +17,90 @@ public class Crag
     }
     public Crag(){
         Console.WriteLine("Constructing from JSON... ");
+    }
+    public float Latitude { get; set; }
+    public float Longitude { get; set; }
+    public string Latlon { get; set; }
+    public string Url { get; set; }
+    public string Name { get; set; }
+    public int Index{get; set;}
+    public double DistanceToHome{get; set;}
+    private const int DECIMAL_PRECISION = 4;
+    public WeatherResponse WeatherData { get; private set; }
+    public struct WeatherResponse{
+        [JsonPropertyName("lat")]
+        public double Lat { get; set; }
+        
+        [JsonPropertyName("lon")]
+        public double Lon { get; set; }
+        
+        [JsonPropertyName("timezone")]
+        public string Timezone { get; set; }
+        
+        [JsonPropertyName("timezone_offset")]
+        public int TimezoneOffset { get; set; }
+        
+        [JsonPropertyName("current")]
+        public CurrentWeather Current { get; set; }
+    }
+    public struct CurrentWeather{
+        [JsonPropertyName("dt")]
+        public long DateTime { get; set; }
+        
+        [JsonPropertyName("sunrise")]
+        public long Sunrise { get; set; }
+        
+        [JsonPropertyName("sunset")]
+        public long Sunset { get; set; }
+        
+        [JsonPropertyName("temp")]
+        public double Temperature { get; set; }
+        
+        [JsonPropertyName("feels_like")]
+        public double FeelsLike { get; set; }
+        
+        [JsonPropertyName("pressure")]
+        public int Pressure { get; set; }
+        
+        [JsonPropertyName("humidity")]
+        public int Humidity { get; set; }
+        
+        [JsonPropertyName("dew_point")]
+        public double DewPoint { get; set; }
+        
+        [JsonPropertyName("uvi")]
+        public double UVIndex { get; set; }
+        
+        [JsonPropertyName("clouds")]
+        public int Clouds { get; set; }
+        
+        [JsonPropertyName("visibility")]
+        public int Visibility { get; set; }
+        
+        [JsonPropertyName("wind_speed")]
+        public double WindSpeed { get; set; }
+        
+        [JsonPropertyName("wind_deg")]
+        public int WindDegrees { get; set; }
+        
+        [JsonPropertyName("wind_gust")]
+        public double WindGust { get; set; }
+        
+        [JsonPropertyName("weather")]
+        public WeatherDescription[] WeatherDescriptions { get; set; }
+    }
+    public struct WeatherDescription{
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+        
+        [JsonPropertyName("main")]
+        public string Main { get; set; }
+        
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
+        
+        [JsonPropertyName("icon")]
+        public string Icon { get; set; }
     }
     public static (float, float) SetLatLon(string latlon){
     
@@ -129,4 +188,34 @@ public class Crag
             }
         }
     
+    public async Task  UpdateWeather(){
+        string update = await Weather.GetWeather(this);
+        WeatherData = JsonSerializer.Deserialize<WeatherResponse>(update);
+        // Console.WriteLine($"Latitude: {WeatherData.Lat}");
+        // Console.WriteLine($"Longitude: {WeatherData.Lon}");
+        Console.WriteLine($"Timezone: {WeatherData.Timezone}");
+        // Console.WriteLine($"Timezone Offset: {WeatherData.TimezoneOffset}");
+
+        var currentWeather = WeatherData.Current;
+        Console.WriteLine($"Current DateTime: {currentWeather.DateTime}");
+        Console.WriteLine($"Sunrise: {currentWeather.Sunrise}");
+        Console.WriteLine($"Sunset: {currentWeather.Sunset}");
+        Console.WriteLine($"Temperature: {currentWeather.Temperature}");
+        Console.WriteLine($"Feels Like: {currentWeather.FeelsLike}");
+        Console.WriteLine($"Pressure: {currentWeather.Pressure}");
+        Console.WriteLine($"Humidity: {currentWeather.Humidity}");
+        Console.WriteLine($"Dew Point: {currentWeather.DewPoint}");
+        Console.WriteLine($"UV Index: {currentWeather.UVIndex}");
+        Console.WriteLine($"Clouds: {currentWeather.Clouds}");
+        Console.WriteLine($"Visibility: {currentWeather.Visibility}");
+        Console.WriteLine($"Wind Speed: {currentWeather.WindSpeed}");
+        Console.WriteLine($"Wind Degrees: {currentWeather.WindDegrees}");
+        Console.WriteLine($"Wind Gust: {currentWeather.WindGust}");
+
+        foreach (var weatherDesc in currentWeather.WeatherDescriptions)
+        {
+            Console.WriteLine($"Weather Description: {weatherDesc.Description}");
+            // Add other fields if needed
+        }
+    }
 }
